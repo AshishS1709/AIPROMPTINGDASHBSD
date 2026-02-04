@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrandSetu AI | Content Engine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <span class="logo-icon">✨</span>
+                <h1>BrandSetu<span>AI</span></h1>
+            </div>
+
+            <form id="generator-form">
+                <section class="form-section">
+                    <h3>Brand Profile</h3>
+                    <div class="input-group">
+                        <label for="brand-name">Brand Name</label>
+                        <input type="text" id="brand-name" placeholder="Enter your brand name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="industry">Industry</label>
+                        <select id="industry" required>
+                            <option value="Digital Marketing">Digital Marketing</option>
+                            <option value="Real Estate">Real Estate</option>
+                            <option value="E-commerce">E-commerce</option>
+                            <option value="Healthcare">Healthcare</option>
+                            <option value="Education">Education</option>
+                            <option value="Technology">Technology</option>
+                            <option value="Finance">Finance</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="primary-service">Primary Service</label>
+                        <input type="text" id="primary-service" placeholder="e.g. Meta Ads Management" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="target-audience">Target Audience</label>
+                        <input type="text" id="target-audience" placeholder="e.g. Real Estate Founders" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="brand-tone">Brand Tone</label>
+                        <select id="brand-tone" required>
+                            <option value="Professional yet engaging">Professional yet engaging</option>
+                            <option value="Casual and Fun">Casual and Fun</option>
+                            <option value="Luxury and Elegant">Luxury and Elegant</option>
+                            <option value="Bold and Energetic">Bold and Energetic</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="brand-phone">Phone Number</label>
+                        <input type="text" id="brand-phone" value="+91 98765 43210" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="cta">Call to Action (CTA)</label>
+                        <input type="text" id="cta" placeholder="e.g. DM 'GROW' to start" required>
+                    </div>
+                </section>
+
+                <section class="form-section">
+                    <h3>Content Brief</h3>
+                    <div class="input-group">
+                        <label for="platform">Platform</label>
+                        <select id="platform" required>
+                            <option value="Instagram">Instagram</option>
+                            <option value="LinkedIn">LinkedIn</option>
+                            <option value="Facebook">Facebook</option>
+                            <option value="Twitter">Twitter</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="content-category">Content Category</label>
+                        <select id="content-category" required>
+                            <option value="Service Promotion">Service Promotion</option>
+                            <option value="Brand Awareness">Brand Awareness</option>
+                            <option value="Festival / Occasion">Festival / Occasion</option>
+                            <option value="Trending Topic">Trending Topic</option>
+                            <option value="Educational">Educational</option>
+                            <option value="Founder / Team">Founder / Team</option>
+                            <option value="Testimonial">Testimonial</option>
+                            <option value="Engagement Post">Engagement Post</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="topic">Topic / Goal</label>
+                        <input type="text" id="topic" placeholder="e.g. AI Automation" required>
+                    </div>
+                </section>
+
+                <section class="form-section festival-section hidden" id="festival-section">
+                    <h3>Festival Details</h3>
+                    <div class="input-group">
+                        <label for="festival-name">Festival Name</label>
+                        <input type="text" id="festival-name" placeholder="e.g. Diwali">
+                    </div>
+                    <div class="input-group">
+                        <label for="festival-type">Festival Type</label>
+                        <select id="festival-type">
+                            <option value="Religious">Religious</option>
+                            <option value="National">National</option>
+                            <option value="Cultural">Cultural</option>
+                            <option value="Seasonal">Seasonal</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="cta-enabled">Include CTA?</label>
+                        <select id="cta-enabled">
+                            <option value="false">No - Pure Wishes</option>
+                            <option value="true">Yes - Include CTA</option>
+                        </select>
+                    </div>
+                </section>
+
+                <button type="submit" id="generate-btn">
+                    <span class="btn-text">Generate Post</span>
+                    <span class="spinner hidden"></span>
+                </button>
+            </form>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <h2>Content Preview</h2>
+                <div class="header-actions">
+                    <button class="icon-btn" title="Refresh">🔄</button>
+                </div>
+            </header>
+
+            <div id="welcome-state" class="empty-state">
+                <div class="empty-icon">🚀</div>
+                <h3>Ready to create magic?</h3>
+                <p>Fill out the brand details and brief to generate a high-quality social media post & AI image.</p>
+            </div>
+
+            <div id="result-stage" class="result-stage hidden">
+                <div class="card post-preview">
+                    <div class="post-header">
+                        <div class="avatar" id="preview-avatar">BS</div>
+                        <div class="post-meta">
+                            <span class="user-name" id="preview-brand-name">Your Brand Name</span>
+                            <span class="post-date">Just now</span>
+                        </div>
+                    </div>
+
+                    <div class="post-body">
+                        <div id="preview-image" class="post-image-container">
+                            <div class="image-skeleton"></div>
+                        </div>
+                        <div class="post-text">
+                            <h4 id="res-headline"></h4>
+                            <p id="res-caption"></p>
+                            <p class="cta" id="res-cta"></p>
+                            <div class="hashtags" id="res-hashtags"></div>
+                        </div>
+                    </div>
+
+                    <div class="post-actions">
+                        <button class="action-btn">❤️ Like</button>
+                        <button class="action-btn">💬 Comment</button>
+                        <button class="action-btn">✈️ Share</button>
+                    </div>
+                </div>
+
+                <div class="card meta-details">
+                    <h3>AI Generation Details</h3>
+                    <div class="meta-item">
+                        <span>Design Prompt:</span>
+                        <p id="res-design-prompt"></p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
