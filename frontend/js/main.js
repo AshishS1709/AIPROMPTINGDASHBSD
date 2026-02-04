@@ -93,7 +93,7 @@ function renderResult(data, brandName) {
         // Backend returns: output\\filename.png
         // Static URL is: http://127.0.0.1:8000/output/filename.png
         const filename = data.image_url.split(/[\\\/]/).pop();
-        // const webUrl = `http://127.0.0.1:8000/output/${filename}`;
+        const webUrl = `/output/${filename}`;
 
         imageContainer.innerHTML = `<img src="${webUrl}" alt="Generated Content" class="post-image">`;
     } else {
