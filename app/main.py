@@ -26,7 +26,11 @@ frontend_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "fronten
 if not os.path.exists(frontend_dir):
     os.makedirs(frontend_dir)
 app.mount("/static", StaticFiles(directory=frontend_dir), name="static")
-
+# Mount output directory if it exists (for generated images)
+output_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "output")
+if os.path.exists(output_dir):
+    app.mount("/output", StaticFiles(directory=output_dir), name="output")
+    
 @app.get("/")
 def root():
     return FileResponse(os.path.join(frontend_dir, "index.html"))
