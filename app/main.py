@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 import os
+from fastapi.responses import FileResponse
 from app.schemas import GenerationRequest, GenerationResponse
 from app.services.prompt_engine import assemble_prompt
 from app.services.text_gen import generate_text
@@ -26,7 +27,9 @@ if not os.path.exists(frontend_dir):
     os.makedirs(frontend_dir)
 app.mount("/static", StaticFiles(directory=frontend_dir), name="static")
 
-app.mount("/static", StaticFiles(directory=frontend_dir), name="static")
+@app.get("/")
+def root():
+    return FileResponse(os.path.join(frontend_dir, "index.html"))
 
 @app.post("/generate-post", response_model=GenerationResponse)
 async def generate_post(request: GenerationRequest):
